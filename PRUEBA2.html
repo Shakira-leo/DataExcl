@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Generales</title>
+    <!-- Enlace a Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <!-- Enlace a tu CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Enlace a jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Enlace a la librería XLSX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+</head>
+<body>
+    <div class="py-12">
+        <div class="container mx-auto w-full">
+            <div class="flex flex-wrap">
+                <!-- Formulario -->
+                <div class="w-full md:w-1/3">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Datos Generales</h3>
+                        <!-- Input para seleccionar archivo Excel -->
+                        <input type="file" id="excelFile" class="mb-4" /> 
+                        <div class="overflow-auto">
+                            <table class="table-auto w-full text-gray-800 dark:text-white px-6">
+                                <thead class="bg-white dark:bg-gray-800">
+                                    <tr class="text-center">
+                                        <th class="py-4 px-4">Nombre</th>
+                                        <th class="py-4 px-4">Simb.</th>
+                                        <th class="py-4 px-4">Entrada</th>
+                                        <th class="py-4 px-4">Unidad <br> Medida</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center" id="data-table">
+                                    <th class="py-4 px-4">GRUPO</th>
+                                                <th class="py-4 px-4"></th>
+                                                <th class="py-4 px-4">
+                                                    <select name="grups" class="form-control w-full bg-yellow-300 text-gray-800 dark:bg-gray-700 dark:text-gray-200 p-2 px-1 rounded-md" id="grups">
+                                                        <option value="A">Grupo A </option>
+                                                        <option value="B">Grupo B </option>
+                                                        <option value="C" selected>Grupo C</option>
+                                                    </select>
+                                                </th>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Modulo de elasticidad minimo</th>
+                                        <th class="py-4 px-4">Emin</th>
+                                        <th class="py-4 px-4"><input type="text" name="mem" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="men" placeholder="Emin" min="0" value="95000" required></th>
+                                        <th class="py-4 px-4">Kg/cm2</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Esfuerzo admisible a la flexión</th>
+                                        <th class="py-4 px-4">fm</th>
+                                        <th class="py-4 px-4"><input type="text" name="esf" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="esf" placeholder="fm" min="0" value="210" required></th>
+                                        <th class="py-4 px-4">Kg/cm2</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Esfuerzo admisible ala compresion paralela</th>
+                                        <th class="py-4 px-4">fc</th>
+                                        <th class="py-4 px-4"><input type="text" name="ead" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="ead" placeholder="fc" min="0" value="145" required></th>
+                                        <th class="py-4 px-4">Kg/cm2</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Esfuerzo admisible a la Traccion paralela</th>
+                                        <th class="py-4 px-4">ft</th>
+                                        <th class="py-4 px-4"><input type="text" name="etp" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="etp" placeholder="ft" min="0" value="145" required></th>
+                                        <th class="py-4 px-4">Kg/cm2</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Esfuerzo admisible al corte parealela</th>
+                                        <th class="py-4 px-4">fv</th>
+                                        <th class="py-4 px-4"><input type="text" name="ecp" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="ecp" placeholder="fv" min="0" value="8" required></th>
+                                        <th class="py-4 px-4">Kg/cm2</th>
+                                    </tr>
+                    
+                                    <!-- FLEXOCOMPRENSIÓN -->
+                                    <tr class="bg-gray-200 dark:bg-gray-700">
+                                        <th colspan="4" class="text-left py-2 px-4 font-bold">FLEXOCOMPRENSIÓN</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Longitud efectiva (lef)</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="lon" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="lon" placeholder="" min="0" value="6.00" required></th>
+                                        <th class="py-4 px-4">m</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">AXIAL</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="axi" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="axi" placeholder="" min="0" value="3400" required></th>
+                                        <th class="py-4 px-4">Kg</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">MOMENTO</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="mom" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="mom" placeholder="" min="0" value="0.00" required></th>
+                                        <th class="py-4 px-4">Kg-m</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Suponiendo una sección</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4">
+                                            <select name="sup" class="form-control w-full bg-yellow-300 text-gray-800 dark:bg-gray-700 dark:text-gray-200 p-2 px-1 rounded-md" id="sup">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31" selected>31</option> 
+                                                <option value="32">32</option>
+                                                <option value="33">33</option>
+                                                <option value="34">34</option>
+                                                <option value="35">35</option>
+                                                <option value="36">36</option>
+                                                <option value="37">37</option>
+                                                <option value="38">38</option>
+                                                <option value="39">39</option>
+                                                <option value="40">40</option>
+                                                <option value="41">41</option>
+                                                <option value="42">42</option>
+                                                <option value="43">43</option>
+                                                <option value="44">44</option>
+                                                <option value="45">45</option>
+                                                <option value="46">46</option>
+                                                <option value="47">47</option>
+                                                <option value="48">48</option>
+                                                <option value="49">49</option>
+                                                <option value="50">50</option>
+                                                <option value="51">51</option>
+                                                <option value="52">52</option>
+                                                <option value="53">53</option>
+                                                <option value="54">54</option>
+                                                <option value="55">55</option>
+                                                <option value="56">56</option>
+                                                <option value="57">57</option>
+                                                <option value="58">58</option>
+                                                <option value="59">59</option>
+                                                <option value="60">60</option>
+                                                <option value="61">61</option>
+                                                <option value="62">62</option>
+                                                <option value="63">63</option>
+                                            </select>
+                                        </th>
+                                    </tr>
+                                    
+                                    <!-- COMPRENSIÓN -->
+                                    <tr class="bg-gray-200 dark:bg-gray-700">
+                                        <th colspan="4" class="text-left py-2 px-4 font-bold">COMPRENSIÓN</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">AXIAL</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="axi1" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="axi1" placeholder="" min="0" value="167.53" required></th>
+                                        <th class="py-4 px-4">KG</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Longitud efectiva=0.8 ld</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="log" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="log" placeholder="" min="0" value="0.856" required></th>
+                                        <th class="py-4 px-4">m</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Suponiendo una sección</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4">
+                                            <select name="susc" class="form-control w-full bg-yellow-300 text-gray-800 dark:bg-gray-700 dark:text-gray-200 p-2 px-1 rounded-md" id="susc">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26" selected>26</option> 
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
+                                                <option value="32">32</option>
+                                                <option value="33">33</option>
+                                                <option value="34">34</option>
+                                                <option value="35">35</option>
+                                                <option value="36">36</option>
+                                                <option value="37">37</option>
+                                                <option value="38">38</option>
+                                                <option value="39">39</option>
+                                                <option value="40">40</option>
+                                                <option value="41">41</option>
+                                                <option value="42">42</option>
+                                                <option value="43">43</option>
+                                                <option value="44">44</option>
+                                                <option value="45">45</option>
+                                                <option value="46">46</option>
+                                                <option value="47">47</option>
+                                                <option value="48">48</option>
+                                                <option value="49">49</option>
+                                                <option value="50">50</option>
+                                                <option value="51">51</option>
+                                                <option value="52">52</option>
+                                                <option value="53">53</option>
+                                                <option value="54">54</option>
+                                                <option value="55">55</option>
+                                                <option value="56">56</option>
+                                                <option value="57">57</option>
+                                                <option value="58">58</option>
+                                                <option value="59">59</option>
+                                                <option value="60">60</option>
+                                                <option value="61">61</option>
+                                                <option value="62">62</option>
+                                                <option value="63">63</option>
+                                            </select>
+                                        </th>
+                                            <tr class="bg-white dark:bg-gray-800">
+                                                <th class="py-4 px-4">Kg/m3</th>
+                                            </tr>
+                                        
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    
+                                    <!-- TRACCIÓN -->
+                                    <tr class="bg-gray-200 dark:bg-gray-700">
+                                        <th colspan="4" class="text-left py-2 px-4 font-bold">TRACCIÓN</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">AXIAL</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="axi2" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="axi2" placeholder="" min="0" value="292" required></th>
+                                        <th class="py-4 px-4">KG</th>
+                                    </tr>
+                                    <th class="py-4 px-4">GRUPO</th>
+                                                <th class="py-4 px-4"></th>
+                                                <th class="py-4 px-4">
+                                                    <select name="grup" class="form-control w-full bg-yellow-300 text-gray-800 dark:bg-gray-700 dark:text-gray-200 p-2 px-1 rounded-md" id="grup">
+                                                        <option value="17.98">Grupo A - 17.98 Kg/m3</option>
+                                                        <option value="18.34">Grupo B - 18.34 Kg/m3</option>
+                                                        <option value="18.42" selected>Grupo C - 18.42 Kg/m3</option>
+                                                    </select>
+                                                </th>
+                                    <!-- FLEXOTRACCIÓN -->
+                                    <tr class="bg-gray-200 dark:bg-gray-700">
+                                        <th colspan="4" class="text-left py-2 px-4 font-bold">FLEXOTRACCIÓN</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">AXIAL</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="axi3" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="axi3" placeholder="" min="0" value="12" required></th>
+                                        <th class="py-4 px-4">Kg</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">MOMENTO</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4"><input type="text" name="mmt" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="mmt" placeholder="" min="0" value="12.00" required></th>
+                                        <th class="py-4 px-4">Kg-m</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Suponiendo una sección</th>
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4">
+                                            <select name="spc" class="form-control w-full bg-yellow-300 text-gray-800 dark:bg-gray-700 dark:text-gray-200 p-2 px-1 rounded-md" id="spc">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28" selected >28</option> 
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
+                                                <option value="32">32</option>
+                                                <option value="33">33</option>
+                                                <option value="34">34</option>
+                                                <option value="35">35</option>
+                                                <option value="36">36</option>
+                                                <option value="37">37</option>
+                                                <option value="38">38</option>
+                                                <option value="39">39</option>
+                                                <option value="40">40</option>
+                                                <option value="41">41</option>
+                                                <option value="42">42</option>
+                                                <option value="43">43</option>
+                                                <option value="44">44</option>
+                                                <option value="45">45</option>
+                                                <option value="46">46</option>
+                                                <option value="47">47</option>
+                                                <option value="48">48</option>
+                                                <option value="49">49</option>
+                                                <option value="50">50</option>
+                                                <option value="51">51</option>
+                                                <option value="52">52</option>
+                                                <option value="53">53</option>
+                                                <option value="54">54</option>
+                                                <option value="55">55</option>
+                                                <option value="56">56</option>
+                                                <option value="57">57</option>
+                                                <option value="58">58</option>
+                                                <option value="59">59</option>
+                                                <option value="60">60</option>
+                                                <option value="61">61</option>
+                                                <option value="62">62</option>
+                                                <option value="63">63</option>
+                                            </select>
+                                        </th>
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    </tr>
+                                    <tr>
+                                        <th class="py-4 px-4">
+                                            <div class="input-group mb-2">
+                                                <button id="desingButton" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button">DISEÑAR</button>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <!-- Agregar más filas según sea necesario -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultados -->
+                <div class="w-full md:w-2/3 px-4 mt-4 md:mt-0">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Resultados</h3>
+                        <div class="overflow-x-auto">
+                            <table id="desingcorte" class="min-w-full text-gray-800 dark:text-white">
+                                <!-- Requisitos de diseño vigas -->
+                                <thead class="bg-gray-200 dark:bg-gray-800">
+                                    <tr class="bg-white text-gray-900 dark:bg-gray-800 dark:text-white">
+                                        <th class="text-xl py-6 px-6 text-left" colspan="4">1.- Requisitos de diseño</th>
+                                    </tr>
+                                    <tr class="bg-gray-500 text-white dark:bg-gray-500 dark:text-white">
+                                        <th class="text-lg py-4 px-4" scope="col">Nombre</th>
+                                        <th class="text-lg py-4 px-4" scope="col">Símbolo</th>
+                                        <th class="text-lg py-4 px-4" scope="col">Fórmula</th>
+                                        <th class="text-lg py-4 px-4" scope="col">Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="predimenension" class="bg-gray-100 dark:bg-gray-800  py-4"></tbody>
+
+                                <tbody id="desingFlexion" class="py-4"></tbody>
+
+                                <!-- Diseño del calculo del area del refuerzo  -->
+                                <thead class="bg-gray-200 dark:bg-gray-700"></thead>
+                                <tbody id="calcared" class="py-4"></tbody>
+
+                                <!-- Diseño por aceros para calcular el area por capas flexion-->
+                                <thead class="bg-gray-200 dark:bg-gray-700"></thead>
+                                <tbody id="acerosfinales" class="py-4"></tbody>
+                                <tbody id="diseñoCortes" class="py-4"></tbody>
+
+                                <!-- Diseño por aceros para calcular el area por capas corte -->
+                                <thead class="bg-gray-200 dark:bg-gray-700"></thead>
+                                <tbody id="aceroscortes" class="py-4"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="PRUEBA2.js"></script>
+
+</body>
+</html>
