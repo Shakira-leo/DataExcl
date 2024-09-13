@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Generales</title>
+    <!-- Enlace a Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <!-- Enlace a tu CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Enlace a jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="py-12">
+        <div class="container mx-auto w-full">
+            <div class="flex flex-wrap">
+                <!-- Formulario -->
+                <div class="w-full md:w-1/3">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Datos Generales</h3>
+                        <div class="overflow-auto">
+                            <table class="table-auto w-full text-gray-800 dark:text-white px-6">
+                                <thead class="bg-white dark:bg-gray-800">
+                                    <tr class="text-center">
+                                        <th class="py-4 px-4">Nombre</th>
+                                        <th class="py-4 px-4">Simb.</th>
+                                        <th class="py-4 px-4">Entrada</th>
+                                        <th class="py-4 px-4">Unidad <br> Medida</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">otras barras
+                                        </th>
+                                        <th class="py-4 px-4">t</th>
+                                        <th class="py-4 px-4"><input type="text" name=" obar" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="obar" placeholder="1" min="0" value="1" required></th>
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Barras sin tratamiento superficial
+                                        </th>
+                                        <th class="py- px-4">e</th>
+                                        <th class="py-4 px-4">
+                                            <input type="text" name="bst" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="bst" placeholder="1" min="0" value="1" required>
+                                        </th>
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Barras de 3/4'' y menores
+                                        </th>
+                                        <th class="py-4 px-4">s </th>
+                                        <th class="py-4 px-4"><input type="text" name="bar3" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="bar3" placeholder="0.8" min="0" value="0.8" required></th>
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Concreto de peso normal
+                                        </th>
+                                        <th class="py-4 px-4">A</th>
+                                        <th class="py-4 px-4"><input type="text" name="cpn" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="cpn" value="1" placeholder="base" min="1" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Art. 12.2.3
+                                        </th>
+                                        <th class="py-4 px-4">Ktr</th>
+                                        <th class="py-4 px-4"><input type="text" name="Art" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="Art" value="0" placeholder="Numero de TRAMOS" min="0" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Recubrimiento lateral
+                                        </th>
+                                        <th class="py-4 px-4">cb</th>
+                                        <th class="py-4 px-4"><input type="text" name="RL" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="RL" value="5" placeholder="Numero de TRAMOS" min="0" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
+                                        <th class="py-4 px-4">cm</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Diametro de la barra corrugada</th>
+                                        <th class="py-4 px-4">db</th>
+                                        <th class="py-4 px-4"><input type="text" name="DBC" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="DBC" value="1.58" placeholder="Numero de TRAMOS" min="1.58" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
+                                        <th class="py-4 px-4">cm</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Esfuerzo de compresion del concreto
+                                        </th>
+                                        <th class="py-4 px-4">fy</th>
+                                        <th class="py-4 px-4"><input type="text" name="ECC" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="ECC" value="4200" placeholder="Numero de TRAMOS" min="4200" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
+                                        <th class="py-4 px-4">kg/cm2	
+                                        </th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4">Resfuerzo de compresion del concreto</th>
+                                        <th class="py-4 px-4">fc</th>
+                                        <th class="py-4 px-4"><input type="text" name="RCC" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="RCC" value="210" placeholder="Numero de TRAMOS" min="210" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
+                                        <th class="py-4 px-4">kg/cm2</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4">x2</th>
+                                        <th class="py-4 px-4"><input type="text" name="XX" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="XX" placeholder="2.5" min="0" value="2.5" required></th>
+                                        <th class="py-4 px-4"></th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4">As</th>
+                                        <th class="py-4 px-4"><input type="text" name="ass" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="ass" placeholder="" min="0.62" value="0.62" required></th>
+                                        <th class="py-4 px-4">cm2</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4">Ap</th>
+                                        <th class="py-4 px-4"><input type="text" name="app" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="app" placeholder="1" min="10" value="10" required></th>
+                                        <th class="py-4 px-4">cm2</th>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th class="py-4 px-4"></th>
+                                        <th class="py-4 px-4">Ldmin</th>
+                                        <th class="py-4 px-4"><input type="text" name="ldd" class="form-control w-full bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 px-1 rounded-md" id="ldd" placeholder="30" min="0" value="30" required></th>
+                                        <th class="py-4 px-4">cm</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="py-4 px-4">
+                                            <div class="input-group mb-2">
+                                                <button id="desingButton" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="button">DISEÑAR</button>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <!-- Agregar más filas según sea necesario -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultados -->
+                <div class="w-full md:w-2/3 px-4 mt-4 md:mt-0">
+                    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Resultados</h3>
+                        <div class="overflow-x-auto">
+                            <table id="desingcorte" class="min-w-full text-gray-800 dark:text-white">
+                                <!-- Requisitos de diseño vigas -->
+                                <thead class="bg-gray-200 dark:bg-gray-800">
+                                    <tr class="bg-white text-gray-900 dark:bg-gray-800 dark:text-white">
+                                        <th class="text-xl py-6 px-6 text-left" colspan="4">1.- Requisitos de diseño</th>
+                                    </tr>
+                                    <tr class="bg-gray-500 text-white dark:bg-gray-500 dark:text-white">
+                                        <th class="text-lg py-4 px-4" scope="col">Nombre</th>
+                                        <th class="text-lg py-4 px-4" scope="col">Símbolo</th>
+                                        <th class="text-lg py-4 px-4" scope="col">Fórmula</th>
+                                        <th class="text-lg py-4 px-4" scope="col">Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="predimenension" class="bg-gray-100 dark:bg-gray-800  py-4"></tbody>
+
+                                <tbody id="desingFlexion" class="py-4"></tbody>
+
+                                <!-- Diseño del calculo del area del refuerzo  -->
+                                <thead class="bg-gray-200 dark:bg-gray-700"></thead>
+                                <tbody id="calcared" class="py-4"></tbody>
+
+                                <!-- Diseño por aceros para calcular el area por capas flexion-->
+                                <thead class="bg-gray-200 dark:bg-gray-700"></thead>
+                                <tbody id="acerosfinales" class="py-4"></tbody>
+                                <tbody id="diseñoCortes" class="py-4"></tbody>
+
+                                <!-- Diseño por aceros para calcular el area por capas corte -->
+                                <thead class="bg-gray-200 dark:bg-gray-700"></thead>
+                                <tbody id="aceroscortes" class="py-4"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
